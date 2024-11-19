@@ -11,6 +11,7 @@ let restrictedRouter = require('./routes/restricted');
 
 let app = express();
 
+app.locals.title = "Demo Login";
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -25,6 +26,17 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+app.use((req,res,next) => {
+  const message = req.session.message;
+  const error = req.session.error;
+  delete req.session.message;
+  delete req.session.error;
+  res.locals.message = "";
+  res.locals.error = "";
+  if(message){res.locals.message = `<p>${message}</p>`};
+  if(error){res.locals.error = `<p>${error}</p>`};
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
