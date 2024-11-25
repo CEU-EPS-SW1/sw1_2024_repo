@@ -11,3 +11,10 @@ form.addEventListener('submit', (e)=> {
         input.value = '';
     }
 });
+
+socket.on('chat', (msg) => {
+    console.log("Mensaje recibido");
+    const item = document.createElement("li");
+    item.textContent = msg;
+    messages.appendChild(item);
+});

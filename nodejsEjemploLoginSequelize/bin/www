@@ -5,9 +5,9 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('ejemploexpressgenerator:server');
+var debug = require('debug')('ejemplologin:server');
 var http = require('http');
-const { Server } = require("socket.io");
+const database = require('../database');
 
 /**
  * Get port from environment and store in Express.
@@ -21,17 +21,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-const io = new Server(server);
-io.on('connection', (socket) => {
-  console.log('User connected');
-  socket.on('chat', (msg) => {
-    console.log("Mensaje recibido del cliente " + msg);
-    io.emit('chat', msg);
-  });
-  socket.on('disconnect', () => {
-    console.log('Usuario desconectado');
-  });
-});
+
 /**
  * Listen on provided port, on all network interfaces.
  */
