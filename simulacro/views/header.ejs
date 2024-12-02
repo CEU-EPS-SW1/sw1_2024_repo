@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li class="menu_title"><%= title %></li>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/tienda">Tienda</a></li>
+        <% if (user) { %>
+        <li><a href="/restricted">Restringido</a></li>
+        <li class="right"><a href="/logout">Logout</a></li>
+        <% } else { %>
+        <li class="right"><a href="/login">Login</a></li>
+        <% } %>
+      </ul>
+    </nav>
